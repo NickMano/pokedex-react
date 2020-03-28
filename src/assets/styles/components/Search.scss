@@ -1,0 +1,31 @@
+@import '../App.scss';
+
+.search {
+    margin-top: 30px;
+    height: 200px;
+    @extend .flex-center;
+    flex-direction: column;
+    justify-content: center;
+    color: $dark-gray-color;
+}
+
+.search__title{
+    font-size: 25px;
+}
+
+.search__input {
+    background-color: white;
+    height: 50px;
+    border-radius: 25px;
+    border: 2px solid $dark-gray-color;
+    width: 70%;
+    color: $dark-gray-color;
+    font-size: 20px;
+    padding: 0 20px;
+    font-family: $theme-font;
+    cursor: pointer;
+}
+
+.search__input:focus {
+    outline: none;
+}
