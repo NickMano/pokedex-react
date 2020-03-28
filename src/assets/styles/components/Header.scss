@@ -7,7 +7,10 @@
     @extend .flex-center;
     flex-direction: column;
     color: white;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 20px 0px
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 20px 0px;
+    @media screen and (max-width: $tablet){
+        height: 60vh;
+    }
 }
 
 .header__image {
