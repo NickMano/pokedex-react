@@ -6,8 +6,6 @@ const usePokemon = (API) => {
     useEffect( () => {
         getPkm(API)
         .then(data => {
-            console.log('pokemons: ')
-            console.log(data)
             setCards(data)
         })
     }, [])
@@ -24,9 +22,12 @@ const getPkm = async (API) => {
             try {let response = await fetch(pkms.url)
             let pkm = await response.json()
             
-            let n = '00' + pkm.id
-            n = n.slice(-3)
-            return({link: '#', imageUrl: `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${n}.png`, number: n, name: pkm.name.charAt(0).toUpperCase() + pkm.name.slice(1)})
+            let number = '00' + pkm.id
+            number = number.slice(-3)
+
+            let types = pkm.types.map( type => type.type.name)
+
+            return({link: '#', imageUrl: `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${number}.png`, number: number, name: pkm.name, types: types})
             } catch (error) {
                 console.log(error)
             }

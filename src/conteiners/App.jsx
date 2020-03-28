@@ -13,7 +13,7 @@ const App = () => (
     <Header />
     <Search />
     <CardConteiner>
-      {usePokemon(API).map( card => <Card key={card.title} {...card}/>)}
+      {usePokemon(API).map( card => <Card key={card.name} {...card}/>)}
     </CardConteiner>
   </div>
 )
