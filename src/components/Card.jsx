@@ -1,9 +1,7 @@
 import React from "react";
 import '../assets/styles/components/Card.scss'
 
-const Card = ({link, imageUrl, number, name}) => {
-    console.log({link})
-    return(
+const Card = ({link, imageUrl, number, name}) => (
     <a className="card" href={link}>
         <figure className="card__imageContainer">
             <img className="card__imageContainer--image" src={imageUrl} alt={name} />
@@ -13,8 +11,8 @@ const Card = ({link, imageUrl, number, name}) => {
             <h4 className="card__number"># {number}</h4>
         </div>
     </a>
-    )
-}
+)
+
 
 
 export default Card

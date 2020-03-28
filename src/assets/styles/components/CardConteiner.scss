@@ -1,0 +1,12 @@
+@import '../App.scss';
+
+.card-conteiner {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 20px 80px;
+    @media screen and (max-width: $laptop-s) {
+        flex-direction: column;
+    }
+}
