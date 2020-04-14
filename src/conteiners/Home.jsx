@@ -8,7 +8,7 @@ import usePokemon from '../hooks/usePokemon';
 
 const API = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20'
 
-const App = () => (
+const Home = () => (
   <div>
     <Header />
     <Search />
@@ -18,4 +18,4 @@ const App = () => (
   </div>
 )
 
-export default App;
+export default Home;
