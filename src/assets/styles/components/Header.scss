@@ -13,6 +13,23 @@
     }
 }
 
+.isCompact {
+    height: 70px;
+    flex-direction: row;
+    justify-content: flex-start;
+    .header__image {
+        height: 32px;
+        margin: 0 10px;
+        animation: none;
+    }
+    .header__title {
+        font-size: 2em;
+    }
+    @media screen and (max-width: $tablet){
+        height: 56px;
+    }
+}
+
 .header__image {
     height: 120px;
     animation: header__image--spin infinite 8s linear;
