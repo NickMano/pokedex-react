@@ -1,0 +1,75 @@
+@import '../App.scss';
+
+.pokemon-detail__image-type {
+    height:36px;
+    padding: 2px
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 360px 1fr;
+    gap: 36px 24px;
+    grid-template-areas: "foto puntos" "datos tipo-debilidades";
+    padding: 20px 16px;
+    @media screen and (max-width: $tablet){
+        grid-template-columns: 1fr;
+        grid-template-rows: 360px 360px 1fr 1fr;
+        grid-template-areas: "foto" "puntos" "datos" "tipo-debilidades";
+    }
+}
+
+.first-row {
+    height: 320px;
+}
+
+.grid-area {
+    align-self: center;
+    width: 40vw;
+    max-width: 520px;
+    padding: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 9px 12px 0 rgba(0, 0, 0, 0.14);
+    @media screen and (max-width: $tablet){
+        justify-self: center !important;
+        width: calc(100% - 24px);
+    }
+}
+
+.foto { 
+    grid-area: foto;
+    justify-self: end;
+    @extend .first-row;
+    @extend .grid-area;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.puntos {
+    grid-area: puntos;
+    @extend .first-row;
+    @extend .grid-area;
+    justify-self: start;
+    border-radius: 8px;
+}
+
+.datos { 
+    grid-area: datos;
+    justify-self: end;
+    @extend .grid-area;
+    height: calc(100% - 16px - 16px);
+    border-radius: 8px;
+}
+
+.tipo-debilidades { 
+    grid-area: tipo-debilidades;
+    justify-self: start;
+    @extend .grid-area;
+    height: calc(100% - 16px - 16px);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
