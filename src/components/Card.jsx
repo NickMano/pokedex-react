@@ -1,14 +1,16 @@
 import React from "react";
 import '../assets/styles/components/Card.scss'
 
-const Card = ({link, imageUrl, number, name, types = []}) => {
-    let images = types.map(type => {
-        try {
-            return {img: require(`../assets/static/${type}.png`), name: type} 
-        } catch (error) {
-            return {img: '', name: type}
-        }
-    })
+const Card = props => {
+    const {imageUrl, number='---', name = '', types = []} = props
+
+    const images = useGetTypes(types)
+
+    const handleSetLastPokemon = () => {
+        props.setLastPokemon(
+            {imageUrl, number, name, types}
+        )
+    }
 
     return(
     <a className="card" href={link}>
