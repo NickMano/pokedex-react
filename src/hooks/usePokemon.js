@@ -27,7 +27,7 @@ const getPkm = async (API) => {
 
             let types = pkm.types.map( type => type.type.name)
 
-            return({link: '#', imageUrl: `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${number}.png`, number: number, name: pkm.name, types: types})
+            return({imageUrl: `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${number}.png`, number: number, name: pkm.name.charAt(0).toUpperCase() + pkm.name.slice(1), types: types})
             } catch (error) {
                 console.log(error)
             }
