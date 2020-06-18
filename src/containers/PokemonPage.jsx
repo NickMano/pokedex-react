@@ -1,19 +1,19 @@
 import React from "react"
-import {connect} from "react-redux"
 import Header from "../components/Header";
 import useGetTypes from '../hooks/useGetTypes';
+import usePokemon from '../hooks/usePokemon';
 import '../assets/styles/components/PokemonDetails.scss'
 
-const PokemonPage = ({pokemon}) => {
-    const {imageUrl, number, name, types = []} = pokemon
-
+const PokemonPage = props => {
+    const pokemon = usePokemon(props.match.params.id)
+    const {imageUrl, number, types = [], weight = '-', height = '-', ability = '-', stats,} = pokemon
     const images = useGetTypes(types)
-    
+
     return(
     <>
         <Header isCompact/>
         <div style={{width: '100%', display: 'flex', justifyContent:'center', alignItems:'center'}} >
-            <h1>#{number} - {name}&nbsp;</h1> 
+            <h1>#{number} - {props.match.params.id}&nbsp;</h1> 
             {(images.length > 0) &&
                 images.map( type => <img className="pokemon-detail__image-type" src={type.img} alt={type.name}/>)   
             }
@@ -71,10 +71,4 @@ const PokemonPage = ({pokemon}) => {
     </>
 )}
 
-const mapStateToProps = state => {
-    return {
-        pokemon: state.lastPokemon,
-    }
-}
-
-export default connect(mapStateToProps, null)(PokemonPage)
+export default PokemonPage
