@@ -9,13 +9,16 @@ const Header = props => {
 
     return(
         <header className={headerClass}>
-            <img className='header__image' src={logo} alt='header' />
             {isCompact ?
-                <Link to='/' style={{textDecoration: 'none', color: 'white'}}>
+                <Link to='/' className='flex-center' style={{textDecoration: 'none', color: 'white'}}>
+                    <img className='header__image' src={logo} alt='header' />
                     <h1 className='header__title' style={{cursor: 'pointer'}}>Pokédex</h1>
                 </Link>
                 :
-                <h1 className='header__title'>Pokédex</h1>
+                <>
+                    <img className='header__image' src={logo} alt='header' />
+                    <h1 className='header__title'>Pokédex</h1>
+                </>
             }
         </header>
     )
