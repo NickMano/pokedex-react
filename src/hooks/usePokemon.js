@@ -1,45 +1,43 @@
 import {useEffect, useState} from 'react'
+import { toCapitalized } from '../Utills'
 
-const usePokemon = (API) => {
+const API = 'https://pokeapi.co/api/v2/pokemon/'
+
+const usePokemon = (pokemonName) => {
     
-    const [cards, setCards] = useState([])
+    const [info, setInfo] = useState([])
     useEffect( () => {
-        getPkm(API)
+        getInfo(API + pokemonName.toLowerCase(), pokemonName)
         .then(data => {
-            setCards(data)
+            setInfo(data)
         })
-    }, [])
-    return cards
+    }, [pokemonName])
+    return info
 }
 
-const getPkm = async (API) => {
-    let pokemons= []
+const getInfo = async (endpoint) => {
+    let pokemon = []
     try{
-        const response = await fetch(API)
-        const data = await response.json()
-
-        pokemons = await data.results.map( async pkms => {
-            try {let response = await fetch(pkms.url)
-            let pkm = await response.json()
+        const response = await fetch(endpoint)
+        const pkm = await response.json()
             
-            let number = '00' + pkm.id
-            number = number.slice(-3)
+        const number = ('00' + pkm.id).slice(-3)
+        const types = pkm.types.map( type => type.type.name)
 
-            let types = pkm.types.map( type => type.type.name)
-
-            return({imageUrl: `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${number}.png`, number: number, name: pkm.name.charAt(0).toUpperCase() + pkm.name.slice(1), types: types})
-            } catch (error) {
-                console.log(error)
-            }
-        })
-
-        pokemons = await Promise.all(pokemons)
-        return pokemons
+        pokemon = { 
+            imageUrl: `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${number}.png`, 
+            number: number, 
+            types: types,
+            weight: (pkm.weight)/10.0,
+            height: (pkm.height)/10.0,
+            ability: toCapitalized(pkm.abilities[0].ability.name),
+            stats: pkm.stats,
+        }
+            
     } catch (error) {
         console.log(error)
-    } finally {
-        return pokemons
-    }
+    } 
+    return pokemon
     
 }
 
