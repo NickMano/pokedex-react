@@ -25,7 +25,7 @@ const Card = props => {
             <h3 className="card__title">{name}</h3>
             <h4 className="card__number"># {number}</h4>
             {(images.length > 0) && <figure className="card__type-container">
-                {images.map( type => <img className="card__type-container--image" src={type.img} alt={type.name} />)}    
+                {images.map( type => <img key={type.name} className="card__type-container--image" src={type.img} alt={type.name} />)}    
             </figure>}
         </div>
     </Link>
