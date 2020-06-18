@@ -11,4 +11,14 @@ body {
     justify-content: center;
 }
 
+.width30-text-center{
+    width: 30%;
+    text-align: center;
+}
+
+.width30-text-center--bold{
+    @extend .width30-text-center;
+    font-weight: bold;
+}
+
 h1,h2,h3,h4,p,a {font-weight: 200;}
