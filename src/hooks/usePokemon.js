@@ -22,7 +22,9 @@ const getInfo = async (endpoint) => {
         const pkm = await response.json()
             
         const number = ('00' + pkm.id).slice(-3)
-        const types = pkm.types.map( type => type.type.name)
+        const types = pkm.types.map( type => type.type.name )
+        const typesInfo = await getTypesInfo(pkm.types)
+        const weaknesses = getWeaknesses(typesInfo)
 
         pokemon = { 
             imageUrl: `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${number}.png`, 
@@ -32,6 +34,7 @@ const getInfo = async (endpoint) => {
             height: (pkm.height)/10.0,
             ability: toCapitalized(pkm.abilities[0].ability.name),
             stats: pkm.stats,
+            weaknesses: weaknesses
         }
             
     } catch (error) {
@@ -39,6 +42,33 @@ const getInfo = async (endpoint) => {
     } 
     return pokemon
     
+}
+
+const getTypesInfo = async (types) => {
+    let info = types.map (
+        async type => {
+            let response = await fetch(type.type.url)
+            let data = await response.json()
+            return data.damage_relations
+        }
+    )
+    
+    return await Promise.all(info)
+}
+
+const getWeaknesses = info => {
+    console.log("info", info)
+    const weaknessesPerType = info.map( typeInfo => typeInfo.double_damage_from).flat().map(weakness => weakness.name)
+    console.log("weaknessesPerType", weaknessesPerType)
+    const resistencePerType = info.map( typeInfo => [...typeInfo.half_damage_from.map(resistence => resistence.name), ...typeInfo.no_damage_from.map(resistence => resistence.name)]).flat()
+    console.log("resistencePerType", resistencePerType)
+
+    const weakness = weaknessesPerType.filter( item => !resistencePerType.includes(item) ) 
+    
+    console.log("weakness", weakness)
+
+
+    return [...new Set(weakness)]
 }
 
 export default usePokemon

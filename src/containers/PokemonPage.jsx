@@ -7,7 +7,7 @@ import { toCapitalized } from "../Utills";
 
 const PokemonPage = props => {
     const pokemon = usePokemon(props.match.params.id)
-    const {imageUrl, number, types = [], weight = '-', height = '-', ability = '-', stats,} = pokemon
+    const {imageUrl, number, types = [], weight = '-', height = '-', ability = '-', stats, weaknesses = []} = pokemon
     const images = useGetTypes(types)
 
     return(
@@ -53,16 +53,14 @@ const PokemonPage = props => {
                 </div>
             </div>
             <div className='tipo-debilidades'>
-                <h3 style={{fontWeight: 'bold'}}>Debilidades</h3>
+                <h3 style={{fontWeight: 'bold'}}>Weaknesses</h3>
                 <div style={{width: '100%',
                  display:'flex',
                  justifyContent:'space-evenly',
                  alignItems:'center',
                  flexWrap: 'wrap'}}
                 >
-                    <img className="card__type-container--image" src={require('../assets/static/ghost.png')} alt='psychic' style={{height:'36px'}}/>
-                    <img className="card__type-container--image" src={require('../assets/static/dark.png')} alt='psychic' style={{height:'36px'}}/>
-                    <img className="card__type-container--image" src={require('../assets/static/bug.png')} alt='psychic' style={{height:'36px'}}/>
+                    {weaknesses.map( weakness => <img key={weakness} className="card__type-container--image" src={require(`../assets/static/${weakness}.png`)} alt={weakness} style={{height:'36px'}}/>)}
                 </div>
             </div>
         </div>
