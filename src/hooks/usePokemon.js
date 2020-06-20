@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import { toCapitalized } from '../Utills'
+import { toCapitalized, getData } from '../Utills'
 
 const API = 'https://pokeapi.co/api/v2/pokemon/'
 
@@ -18,8 +18,7 @@ const usePokemon = (pokemonName) => {
 const getInfo = async (endpoint) => {
     let pokemon = []
     try{
-        const response = await fetch(endpoint)
-        const pkm = await response.json()
+        const pkm = await getData(endpoint)
             
         const number = ('00' + pkm.id).slice(-3)
         const types = pkm.types.map( type => type.type.name )
@@ -34,9 +33,8 @@ const getInfo = async (endpoint) => {
             height: (pkm.height)/10.0,
             ability: toCapitalized(pkm.abilities[0].ability.name),
             stats: pkm.stats,
-            weaknesses: weaknesses
+            weaknesses: weaknesses,
         }
-            
     } catch (error) {
         pokemon = { hasError: true}
         console.log(error)
@@ -48,8 +46,7 @@ const getInfo = async (endpoint) => {
 const getTypesInfo = async (types) => {
     let info = types.map (
         async type => {
-            let response = await fetch(type.type.url)
-            let data = await response.json()
+            const data = await getData(type.type.url)
             return data.damage_relations
         }
     )

@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import { toCapitalized } from '../Utills'
+import { toCapitalized, getData } from '../Utills'
 
 const usePokemons = (API) => {
     
@@ -16,12 +16,10 @@ const usePokemons = (API) => {
 const getPkm = async (API) => {
     let pokemons= []
     try{
-        const response = await fetch(API)
-        const data = await response.json()
+        const data = await getData(API)
 
         pokemons = await data.results.map( async pkms => {
-            try {let response = await fetch(pkms.url)
-            let pkm = await response.json()
+            try {let pkm = await getData(pkms.url)
             
             let number = '00' + pkm.id
             number = number.slice(-3)
