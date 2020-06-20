@@ -38,6 +38,7 @@ const getInfo = async (endpoint) => {
         }
             
     } catch (error) {
+        pokemon = { hasError: true}
         console.log(error)
     } 
     return pokemon
@@ -57,16 +58,9 @@ const getTypesInfo = async (types) => {
 }
 
 const getWeaknesses = info => {
-    console.log("info", info)
     const weaknessesPerType = info.map( typeInfo => typeInfo.double_damage_from).flat().map(weakness => weakness.name)
-    console.log("weaknessesPerType", weaknessesPerType)
     const resistencePerType = info.map( typeInfo => [...typeInfo.half_damage_from.map(resistence => resistence.name), ...typeInfo.no_damage_from.map(resistence => resistence.name)]).flat()
-    console.log("resistencePerType", resistencePerType)
-
     const weakness = weaknessesPerType.filter( item => !resistencePerType.includes(item) ) 
-    
-    console.log("weakness", weakness)
-
 
     return [...new Set(weakness)]
 }
