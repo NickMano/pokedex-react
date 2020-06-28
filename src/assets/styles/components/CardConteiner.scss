@@ -7,7 +7,6 @@
     flex-wrap: wrap;
     padding: 20px 80px;
     @media screen and (max-width: $tablet) {
-        flex-direction: column;
         padding: 20px 0;
     }
 }
