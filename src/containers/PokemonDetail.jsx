@@ -2,11 +2,11 @@ import React from "react"
 import Header from "../components/Header";
 import useGetTypes from '../hooks/useGetTypes';
 import usePokemon from '../hooks/usePokemon';
-import '../assets/styles/components/PokemonDetails.scss'
+import '../assets/styles/components/PokemonDetail.scss'
 import { toCapitalized } from "../Utills";
 import NotFound from "./NotFound";
 
-const PokemonPage = props => {
+const PokemonDetail = props => {
     const pokemon = usePokemon(props.match.params.id)
     const {imageUrl, number, types = [], weight = '-', height = '-', ability = '-', stats, weaknesses = []} = pokemon
     const images = useGetTypes(types)
@@ -28,7 +28,7 @@ const PokemonPage = props => {
                     <img 
                         src={imageUrl} 
                         alt={props.match.params.id}
-                        style={{objectFit: 'contain'}}
+                        style={{objectFit: 'contain', width: '100%'}}
                     />
                 </div>
                 <div className='stats'>
@@ -71,4 +71,4 @@ const PokemonPage = props => {
         </>
 )}
 
-export default PokemonPage
+export default PokemonDetail
