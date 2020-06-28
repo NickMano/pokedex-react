@@ -1,0 +1,53 @@
+@import '../App.scss';
+
+.card {
+    width: 240px;
+    max-width: 100%;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px ;
+    min-height: 100px;
+    padding: 20px;
+    background: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: black;
+    transition: background 150ms ease-out 0s, border 150ms ease-out 0s, transform 150ms ease-out 0s;
+    &:hover {
+        border-color: $dark-gray-color;
+        transform: translate3d(0px, -3px, 0px);
+        box-shadow: rgba(0, 0, 0, 0.08) 0px 3px 10px 0px;
+    }
+}
+
+.card__details {
+    flex-wrap: wrap;
+    width: 90%;
+}
+
+.card__imageContainer{
+    margin: 0;
+    @extend .flex-center;
+    width: 60%;
+}
+
+.card__imageContainer--image {
+    width: 100%;
+}
+
+.card__type-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    margin: 0;
+}
+
+.card__type-container--image {
+    height: 100%;
+    padding: 0 8px;
+}
