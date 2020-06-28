@@ -5,6 +5,7 @@
     height: 200px;
     @extend .flex-center;
     flex-direction: column;
+    text-align: center;
     justify-content: center;
     color: $dark-gray-color;
     @media screen and (max-width: $tablet){
